@@ -1,0 +1,21 @@
+{
+  "name": "packer",
+  "version": "1.0.0",
+  "description": "This will find the most possible to ship items in your package of items",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "packer"
+  ],
+  "author": "M.G.Husny Ahamed",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.11.7"
+  }
+}
