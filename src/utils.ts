@@ -10,6 +10,7 @@ export function removeAllWhiteSpaces(text: string): string {
   return text.replace(/\s/g, "");
 }
 
+// Promisified file row reader
 export async function readFileByRows(path): Promise<string[]> {
   const fileStream = fs.createReadStream(path, {
     encoding: "utf8",

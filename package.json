@@ -8,6 +8,8 @@
     "/dist"
   ],
   "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
     "test": "npm test"
   },
   "keywords": [
