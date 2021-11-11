@@ -59,7 +59,7 @@ export default class Packer {
     for (const row of rowData) {
       if (row.totalWeightAllowed > MAX_WEIGHT_OF_PACKAGE) {
         throw new APIException(
-          `Total weight a package can take cannot\n exceed ${MAX_WEIGHT_OF_PACKAGE}`
+          `Total weight of the package can take cannot exceed ${MAX_WEIGHT_OF_PACKAGE}`
         );
       }
 

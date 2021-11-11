@@ -1,18 +1,14 @@
-import * as fs from "fs";
-import { createInterface, Interface } from "readline";
-
-// Eg: convert €45 to 45
-export function extractNumberFromText(text: string): number {
-  return Number(text.replace(/^\D+/g, ""));
-}
-
-export function removeAllWhiteSpaces(text: string): string {
-  return text.replace(/\s/g, "");
-}
+import { createReadStream, existsSync } from "fs";
+import { createInterface } from "readline";
+import { APIException } from "./error";
 
 // Promisified file row reader
 export async function readFileByRows(path): Promise<string[]> {
-  const fileStream = fs.createReadStream(path, {
+  if (!existsSync(path)) {
+    throw new APIException(`File not found at ${path}`);
+  }
+
+  const fileStream = createReadStream(path, {
     encoding: "utf8",
     autoClose: true,
   });
@@ -35,6 +31,15 @@ export async function readFileByRows(path): Promise<string[]> {
       resolve(lines);
     });
   });
+}
+
+// Eg: convert €45 to 45
+export function extractNumberFromText(text: string): number {
+  return Number(text.replace(/^\D+/g, ""));
+}
+
+export function removeAllWhiteSpaces(text: string): string {
+  return text.replace(/\s/g, "");
 }
 
 export function isLastIndex(array: any[], itemIndex: number): boolean {
