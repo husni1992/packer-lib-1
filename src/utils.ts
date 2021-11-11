@@ -24,7 +24,7 @@ export async function readFileByRows(path): Promise<string[]> {
 
   const lines: string[] = [];
   rd.on("line", (line: string) => {
-    // push only if it's not an empty line
+    // push only the non empty lines
     if (line.trim()) {
       lines.push(line);
     }
