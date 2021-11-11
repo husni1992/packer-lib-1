@@ -22,6 +22,16 @@ Then go to the node.js application you want to use this library and run the belo
 
     npm link {root path of mobiq-packer}
 
+# Testing
+
+Run unit tests
+
+    npm test
+
+Run test in watch mode
+
+    npm run test:watch
+
 # API Summary
 
 |                          |                                           |                      |

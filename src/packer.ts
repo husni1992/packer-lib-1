@@ -12,28 +12,28 @@ import {
   extractNumberFromText,
 } from "./utils";
 
-export interface ItemDetails {
+interface ItemDetails {
   index: number;
   weight: number;
   cost: number;
   row: number;
 }
 
-export interface ItemGroup {
+interface ItemGroup {
   totalCost: number;
   totalWeight: number;
   group: ItemDetails[];
 }
 
-export interface Row {
+interface Row {
   totalWeightAllowed: number;
   itemsInPackage: ItemDetails[];
 }
 
-export class Packer {
+export default class Packer {
   static async pack(filePath: string): Promise<string> {
     const fileData = await readFileByRows(filePath);
-    const fileRowData = await this.extractRowData(fileData);
+    const fileRowData = this.extractRowData(fileData);
 
     this.validateData(fileRowData);
 
@@ -50,16 +50,19 @@ export class Packer {
     return this.formatResponseData(result);
   }
 
+  /* Validate
+    1. Max weight that a package can take is ≤ 100
+    2. Max weight and cost of an item is ≤ 100
+    3. There might be up to 15 items you need to choose from
+  */
   private static validateData(rowData: Row[]) {
     for (const row of rowData) {
-      // 1. Max weight that a package can take is ≤ 100
       if (row.totalWeightAllowed > MAX_WEIGHT_OF_PACKAGE) {
         throw new APIException(
-          `Total weight a package can take cannot exceed ${MAX_WEIGHT_OF_PACKAGE}`
+          `Total weight a package can take cannot\n exceed ${MAX_WEIGHT_OF_PACKAGE}`
         );
       }
 
-      // 2. Max weight and cost of an item is ≤ 100
       for (const item of row.itemsInPackage) {
         if (
           item.weight > MAX_WEIGHT_AND_COST_OF_ITEM ||
@@ -71,7 +74,6 @@ export class Packer {
         }
       }
 
-      // 3. There might be up to 15 items you need to choose from
       if (row.itemsInPackage.length > MAX_ITEMS_OF_PACKAGE) {
         throw new APIException(
           `Only ${MAX_WEIGHT_OF_PACKAGE} items allowed per package`
@@ -82,7 +84,7 @@ export class Packer {
     }
   }
 
-  private static async extractRowData(rows: string[]): Promise<Row[]> {
+  private static extractRowData(rows: string[]): Row[] {
     let row = 0;
     const results = [];
 
