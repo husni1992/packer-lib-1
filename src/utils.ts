@@ -1,14 +1,15 @@
 import { createReadStream, existsSync } from "fs";
+import { normalize } from "path";
 import { createInterface } from "readline";
 import { APIException } from "./error";
 
 // Promisified file row reader
 export async function readFileByRows(path): Promise<string[]> {
-  if (!existsSync(path)) {
-    throw new APIException(`File not found at ${path}`);
+  if (!existsSync(normalize(path))) {
+    throw new APIException(`File not found at ${normalize(path)}`);
   }
 
-  const fileStream = createReadStream(path, {
+  const fileStream = createReadStream(normalize(path), {
     encoding: "utf8",
     autoClose: true,
   });

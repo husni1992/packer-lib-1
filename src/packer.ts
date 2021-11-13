@@ -33,21 +33,21 @@ interface Row {
 export default class Packer {
   static async pack(filePath: string): Promise<string> {
     const fileData = await readFileByRows(filePath);
-    const fileRowData = this.extractRowData(fileData);
+    const fileRowData = Packer.extractRowData(fileData);
 
-    this.validateData(fileRowData);
+    Packer.validateData(fileRowData);
 
     const result = fileRowData.map((row) => {
-      const combinations = this.findPossibleCombinationsOfItemsInRow(
+      const combinations = Packer.findPossibleCombinationsOfItemsInRow(
         row.totalWeightAllowed,
         row.itemsInPackage
       );
       if (!combinations.length) return null;
 
-      return this.findSuitableGroupOfItems(combinations);
+      return Packer.findSuitableGroupOfItems(combinations);
     });
 
-    return this.formatResponseData(result);
+    return Packer.formatResponseData(result);
   }
 
   /* Validate
@@ -135,7 +135,7 @@ export default class Packer {
       };
     });
 
-    const [sorted] = this.sortByHighestCostAndLowestWeight(summedList);
+    const [sorted] = Packer.sortByHighestCostAndLowestWeight(summedList);
 
     return sorted;
   }
