@@ -1,4 +1,3 @@
-import { APIException } from './error';
 import { MAX_ITEMS_OF_PACKAGE, MAX_WEIGHT_OF_PACKAGE, MAX_WEIGHT_AND_COST_OF_ITEM } from './consts';
 import {
 	readFileByRows,
@@ -7,6 +6,7 @@ import {
 	removeAllWhiteSpaces,
 	extractNumberFromText,
 } from './utils';
+import { APIException } from './error';
 
 interface ItemDetails {
 	index: number;
