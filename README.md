@@ -1,26 +1,49 @@
 # Packer
 
 Packer is a JavaScript library for Node.js built with TypeScript that allows you to determine which items to put into the package with highest value without overloading the package. So the total weight is within the specified limit but the total value is as high as possible. You just have to provide the absolute path to a file that includes the items to choose from, and we will find which things to put in the package.
+ 
+# Supported environments
+    node
 
-# Installation (only after publishing as a npm package)
+# Quick start
 
-    npm install mobiq-packer
+1. Install dependencies
 
-# Development
+        npm install
 
-To setup this mobiq-packer locally, you just have to build the app running below script. And then go to the project you need to import this and `npm link`.
+2. Compile
 
-This will compile the typescript files to `/dist` folder.
+        npm run build
 
-    npm run build
+3. Compile in watch mode (Optional)
 
-This will compile the typescript files in watch mode
+        npm run build:watch
 
-    npm run build:watch
+4. Go to the node.js application you want to use this library and run the below script.
+This will create a symlink to the `Packer` library in your app. 
 
-Then go to the node.js application you want to use this library and run the below script
+        npm link {path to packer}
 
-    npm link {root path of mobiq-packer}
+# Usage:
+
+```javascript
+import Packer from "packer";
+
+await Packer.pack(absolutePathToYourFile);
+```
+
+# Linting the codebase
+Check lint errors
+
+    npm run lint
+
+Fix lint errors
+
+    npm run lint:fix
+Requirements for running linting
+```
+node:   14.xx.x
+```
 
 # Testing
 
@@ -38,13 +61,6 @@ Run test in watch mode
 | ------------------------ | ----------------------------------------- | -------------------- |
 | [`Packer.pack()`](#pack) | Determine which things to pick in package | Method type `static` |
 
-# Usage:
-
-```javascript
-import Packer from "mobiq-packer";
-
-await Packer.pack(absolutePathToYourFile);
-```
 
 ## API
 
