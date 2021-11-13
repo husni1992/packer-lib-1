@@ -1,6 +1,6 @@
 # Packer
 
-Packer is a JavaScript library for Node.js that allows you to determine which things to put into the package so that the total weight is less than or equal to the package limit and the total cost is as large as possible. You just have to provide the absolute path to a file with data of packages, and you will get to know which things to pick in the packages.
+Packer is a JavaScript library for Node.js built with TypeScript that allows you to determine which items to put into the package with highest value without overloading the package. So the total weight is within the specified limit but the total value is as high as possible. You just have to provide the absolute path to a file that includes the items to choose from, and we will find which things to put in the package.
 
 # Installation (only after publishing as a npm package)
 
