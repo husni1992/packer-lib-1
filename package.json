@@ -19,7 +19,7 @@
 	"keywords": [
 		"packer"
 	],
-	"author": "M.G.Husny Ahamed",
+	"author": "M.G.Husny Ahamed <mgha123@gmail.com>",
 	"license": "ISC",
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.16.3",

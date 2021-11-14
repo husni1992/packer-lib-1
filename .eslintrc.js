@@ -40,7 +40,6 @@ module.exports = {
 		],
 		'@typescript-eslint/no-empty-function': ERROR,
 		'no-console': [ERROR, { allow: ['warn', 'error'] }],
-		'@typescript-eslint/explicit-function-return-type': WARN,
-		'@typescript-eslint/explicit-module-boundary-types': WARN,
+		'@typescript-eslint/explicit-function-return-type': WARN
 	},
 };
