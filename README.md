@@ -24,6 +24,13 @@ This will create a symlink to the `Packer` library in your app.
 
         npm link {path to packer}
 
+# Run sample
+You can run the Packer.pack(filePath) with the example_input file in `run-example/example_input` and see the output in console. 
+
+Run `npm install` and then Run below command from root.
+
+    npm run example
+
 # Usage:
 
 ```javascript
