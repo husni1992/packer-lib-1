@@ -6,11 +6,14 @@ import { FileNotFoundException } from './error';
 
 // Promisified file row reader
 export async function readFileByRows(path): Promise<string[]> {
-	if (!existsSync(normalize(path))) {
-		throw new FileNotFoundException(`File not found at ${normalize(path)}`);
+	// Normalize path for cross platform compatibility
+	const normalizedPath = normalize(path);
+
+	if (!existsSync(normalizedPath)) {
+		throw new FileNotFoundException(`File not found at ${normalizedPath}`);
 	}
 
-	const fileStream = createReadStream(normalize(path), {
+	const fileStream = createReadStream(normalizedPath, {
 		encoding: 'utf8',
 		autoClose: true,
 	});
@@ -40,14 +43,28 @@ export function extractNumberFromText(text: string): number {
 	return Number(text.replace(/^\D+/g, ''));
 }
 
+// Get rid of all white spaces it between strings
 export function removeAllWhiteSpaces(text: string): string {
 	return text.replace(/\s/g, '');
 }
 
+// Check if index of an array is the last item's index
 export function isLastIndex(array: unknown[], itemIndex: number): boolean {
 	return itemIndex === array.length - 1;
 }
 
 export function findSumOfArrayByKey(array, key): number {
 	return array.reduce((a, b) => a + (b[key] || 0), 0);
+}
+
+// In an array of objects, check if there are duplicates in items of a specific key
+export function checkIfDuplicateExists(array, key): boolean | void {
+	const extractedArrayByKey = array.map((item) => item[key]).filter(Boolean);
+
+	// provided key does not exist in array and return void
+	if (array.length && !extractedArrayByKey.length) {
+		return;
+	}
+
+	return array.length !== new Set(extractedArrayByKey).size;
 }
