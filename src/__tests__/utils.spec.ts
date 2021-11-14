@@ -1,12 +1,12 @@
 import * as path from 'path';
 
 import {
-	extractNumberFromText,
-	removeAllWhiteSpaces,
-	isLastIndex,
-	findSumOfArrayByKey,
-	readFileByRows,
 	checkIfDuplicateExists,
+	extractNumberFromText,
+	findSumOfArrayByKey,
+	isLastIndex,
+	readFileByRows,
+	removeAllWhiteSpaces,
 } from '../utils';
 
 describe('Utils', () => {
@@ -45,14 +45,25 @@ describe('Utils', () => {
 
 	describe('readFileByRows', () => {
 		test('should read file by each rows and return an array except empty lines', async () => {
-			const pathForMockFile = path.resolve(__dirname, './mocks/mock-input');
+			const pathForMockFile = path.resolve(
+				__dirname,
+				'./mocks/mock-input',
+			);
 			const res = await readFileByRows(pathForMockFile);
 
-			expect(res).toEqual(['Apricot melon', 'cheese cake', 'marzipan cake', 'cashew crepes']);
+			expect(res).toEqual([
+				'Apricot melon',
+				'cheese cake',
+				'marzipan cake',
+				'cashew crepes',
+			]);
 		});
 
 		test('should throw FileNotFoundException if file path does not exist', async () => {
-			const nonExistentPath = path.resolve(__dirname, './not-existent-path');
+			const nonExistentPath = path.resolve(
+				__dirname,
+				'./not-existent-path',
+			);
 
 			await expect(readFileByRows(nonExistentPath)).rejects.toThrow(
 				`File not found at ${nonExistentPath}`,
@@ -130,13 +141,19 @@ describe('Utils', () => {
 			},
 		];
 		test('should return true if duplicates items found of a specific key in an array', () => {
-			const isDuplicated = checkIfDuplicateExists(itemsWithDuplicatedIndex, 'index');
+			const isDuplicated = checkIfDuplicateExists(
+				itemsWithDuplicatedIndex,
+				'index',
+			);
 
 			expect(isDuplicated).toBe(true);
 		});
 
 		test('should return void invalid key provided', () => {
-			const isDuplicated = checkIfDuplicateExists(itemsWithDuplicatedIndex, 'invalidKey');
+			const isDuplicated = checkIfDuplicateExists(
+				itemsWithDuplicatedIndex,
+				'invalidKey',
+			);
 
 			expect(isDuplicated).toBe(void 0);
 		});

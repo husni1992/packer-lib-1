@@ -1,11 +1,11 @@
 import { createReadStream, existsSync } from 'fs';
-import { normalize } from 'path';
 import { createInterface } from 'readline';
+import { normalize } from 'path';
 
 import { FileNotFoundException } from './error';
 
 // Promisified file row reader
-export async function readFileByRows(path): Promise<string[]> {
+export async function readFileByRows(path: string): Promise<string[]> {
 	// Normalize path for cross platform compatibility
 	const normalizedPath = normalize(path);
 
@@ -53,12 +53,12 @@ export function isLastIndex(array: unknown[], itemIndex: number): boolean {
 	return itemIndex === array.length - 1;
 }
 
-export function findSumOfArrayByKey(array, key): number {
+export function findSumOfArrayByKey(array, key: string): number {
 	return array.reduce((a, b) => a + (b[key] || 0), 0);
 }
 
 // In an array of objects, check if there are duplicates in items of a specific key
-export function checkIfDuplicateExists(array, key): boolean | void {
+export function checkIfDuplicateExists(array: unknown[], key: string): boolean {
 	const extractedArrayByKey = array.map((item) => item[key]).filter(Boolean);
 
 	// provided key does not exist in array and return void

@@ -3,8 +3,8 @@ import * as path from 'path';
 import Packer from '../packer';
 
 describe('Packer', () => {
-	test('should return expected indexes of item for each row', async () => {
-		// This file has some redundant white spaces for testing to verify if it works as expected 
+	test('should pick items for package with within the limit total weight and total cost is as large as possible', async () => {
+		// This file has some redundant white spaces for testing. It should work een with whites paces
 		const mockFilePath = path.resolve(__dirname, './mocks/valid-data-test');
 
 		const res = await Packer.pack(mockFilePath);
@@ -36,18 +36,24 @@ describe('Packer', () => {
 	});
 
 	test('should throw if the weight of an item exceeded 100', async () => {
-		const mockFilePath = path.resolve(__dirname, './mocks/over-weighted-item-test');
+		const mockFilePath = path.resolve(
+			__dirname,
+			'./mocks/over-weighted-item-test',
+		);
 
 		await expect(Packer.pack(mockFilePath)).rejects.toThrow(
-			"Weight of item in row '1' at index '3' is 150. Maximum allowed is 100",
+			"Weight of item in row '1' at index '3' is 150. Maximum weight is 100",
 		);
 	});
 
 	test('should throw if the cost of an item exceeded 100', async () => {
-		const mockFilePath = path.resolve(__dirname, './mocks/over-cost-item-test');
+		const mockFilePath = path.resolve(
+			__dirname,
+			'./mocks/over-cost-item-test',
+		);
 
 		await expect(Packer.pack(mockFilePath)).rejects.toThrow(
-			"Cost of item in row '1' at index '1' is 455. Maximum allowed is 100",
+			"Cost of item in row '1' at index '1' is 455. Maximum cost is 100",
 		);
 	});
 
@@ -55,7 +61,7 @@ describe('Packer', () => {
 		const mockFilePath = path.resolve(__dirname, './mocks/too-many-items');
 
 		await expect(Packer.pack(mockFilePath)).rejects.toThrow(
-			'Only 15 items allowed per package',
+			'Number of items in row 1 is 16. Maximum of 15 items allowed per package',
 		);
 	});
 });
