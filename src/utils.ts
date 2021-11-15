@@ -2,15 +2,26 @@ import { createReadStream, existsSync } from 'fs';
 import { createInterface } from 'readline';
 import { normalize } from 'path';
 
-import { FileNotFoundException } from './error';
+import { detectFileSync } from 'chardet';
+
+import { APIException, FileNotFoundException } from './error';
 
 // Promisified file row reader
-export async function readFileByRows(path: string): Promise<string[]> {
+export async function readFileByRows(
+	path: string,
+	validateFileType?: boolean,
+): Promise<string[]> {
 	// Normalize path for cross platform compatibility
 	const normalizedPath = normalize(path);
 
 	if (!existsSync(normalizedPath)) {
 		throw new FileNotFoundException(`File not found at ${normalizedPath}`);
+	}
+
+	if (validateFileType) {
+		if (detectFileSync(normalizedPath) !== 'UTF-8') {
+			throw new APIException('File type should be UTF-8');
+		}
 	}
 
 	const fileStream = createReadStream(normalizedPath, {

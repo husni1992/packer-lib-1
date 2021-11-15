@@ -89,7 +89,7 @@ Run test in watch mode
 
 ## API
 
-### pack(filePath: string)
+### pack(filePath: string, validateFileType: boolean)
 
 This is an `asynchronous` static method that accepts an absolute file path. Each row is an item enclosed in parentheses where the 1st number is a item’s index number, the 2nd is its weight and the 3rd is its cost.
 
@@ -98,6 +98,9 @@ This is an `asynchronous` static method that accepts an absolute file path. Each
 
 This should be an absolute path to a UTF-8 formatted file
 
+`validateFileType: boolean`
+
+Passing `true` will strictly validate the file type to be UTF-8. An exception will be thrown if the validation fails.
 ## Example input file content
 
 ```

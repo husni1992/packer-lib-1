@@ -32,8 +32,11 @@ interface ItemGroup {
 }
 
 export default class Packer {
-	static async pack(filePath: string): Promise<string> {
-		const fileData = await readFileByRows(filePath);
+	static async pack(
+		filePath: string,
+		validateFileType?: boolean,
+	): Promise<string> {
+		const fileData = await readFileByRows(filePath, validateFileType);
 		const fileRowData = Packer.formatRowData(fileData);
 
 		const result = fileRowData.map((row) => {
