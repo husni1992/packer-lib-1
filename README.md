@@ -31,10 +31,6 @@ Install dependencies (if you haven't already)
 
     npm install
 
-Compile
-
-    npm run build
-
 Run example
 
     npm run example

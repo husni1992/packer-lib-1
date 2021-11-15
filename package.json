@@ -14,7 +14,7 @@
 		"test:watch": "jest --verbose --watch",
 		"lint": "eslint src/**/*.ts{,x}",
 		"lint:fix": "eslint **/*.ts{,x} --fix",
-		"example": "node run-example/test.js"
+		"example": "npm run build && node run-example/test.js"
 	},
 	"keywords": [
 		"packer"
